@@ -11,7 +11,7 @@
 
 # Force sourcing instead of executing
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
-    printf 'Error: source ./deactivate.sh instead of executing it.\n' >&2
+    echo 'Error: source ./deactivate.sh instead of executing it.' >&2
     exit 1
 fi
 

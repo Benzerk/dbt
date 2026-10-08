@@ -27,7 +27,7 @@
 
 # Prevent sourcing instead of executing
 if [[ "${BASH_SOURCE[0]}" != "$0" ]]; then
-    printf 'Error: run this script with bash ./make.sh; do not source it.\n' >&2
+    echo 'Error: run this script with bash ./make.sh; do not source it.' >&2
     return 1
 fi
 usage() {

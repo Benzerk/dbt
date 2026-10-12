@@ -69,8 +69,8 @@ fi
 
 if [ "$check_for_updates" = true ]; then
     echo 'Starting action: Check for updates'
-    echo 'Current Python version'
-    py --version
+    echo 'Python versions available on the system'
+    py list
     echo 'Latest Python version available online'
     py list --online --one
     echo 'Current dbt version (flags a newer dbt-core release if available)'

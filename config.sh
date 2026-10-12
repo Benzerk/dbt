@@ -22,8 +22,11 @@ local_logs_dir="${local_root_dir%/}/logs"
 local_certificate_path="${local_root_dir%/}/zscaler.pem"
 local_ssh_key_path="$HOME/.ssh/id_ed25519"
 
+# Python version selected by the Windows Python launcher
+local_python_version='3.14'
+
 # Local path for Python virtual environment on Windows
-local_virtual_env_dir="${local_root_dir%/}/.virtualenv/"
+local_virtual_env_dir="${local_root_dir%/}/.virtualenv_${local_python_version//./}/"
 local_virtual_env_activation_path="${local_virtual_env_dir%/}/Scripts/activate"
 
 # Environement variables for proxy, certificates, and Python package management

@@ -21,17 +21,17 @@ set -euo pipefail
 source "$(dirname -- "${BASH_SOURCE[0]}")/config.sh"
 
 echo 'Creating Virtual Environment'
-py --version
+py "-$local_python_version" --version
 rm -rf "$local_virtual_env_dir"
-py -m venv "$local_virtual_env_dir"
+py "-$local_python_version" -m venv "$local_virtual_env_dir"
 
 echo 'Activating Virtual Environment'
 source "$local_virtual_env_activation_path"
 
 echo 'Installing Libraries'
-py -m ensurepip --default-pip
-py -m pip install --upgrade pip
-pip install -r "${local_root_dir%/}/requirements.txt"
+python -m ensurepip --default-pip
+python -m pip install --upgrade pip
+python -m pip install -r "${local_root_dir%/}/requirements.txt"
 
 echo 'Creating Logs Directory'
 mkdir -p "${local_logs_dir%/}/"

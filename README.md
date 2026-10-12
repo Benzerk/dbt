@@ -5,7 +5,7 @@ Personal scripts for setting up a Python environment and running a dbt project w
 ## Prerequisites
 
 - Windows with Git Bash (the scripts use commands and paths from this environment).
-- Python installed and available through the `py` launcher.
+- Python 3.14 installed and available through the `py` launcher. Change `local_python_version` in `config.sh` to select another installed version.
 - The repository's `requirements.txt` file.
 - The company CA certificate `zscaler.pem` at the repository root.
 - An accessible company proxy at `http://127.0.0.1:9000/`.
@@ -13,7 +13,7 @@ Personal scripts for setting up a Python environment and running a dbt project w
 
 ## Installation
 
-Installation creates a Python virtual environment in `.virtualenv/`, installs the Python dependencies listed in `requirements.txt`, and creates the `logs/` directory. It uses the certificate and proxy configured in `config.sh`. Run `install.sh` in a subprocess; the virtual environment will not remain active in the current shell. Activate it with `activate.sh` after installation.
+Installation creates a Python virtual environment in a version-specific `.virtualenv_<version>` directory, installs the Python dependencies listed in `requirements.txt`, and creates the `logs/` directory. It uses the certificate and proxy configured in `config.sh`. Run `install.sh` in a subprocess; the virtual environment will not remain active in the current shell. Activate it with `activate.sh` after installation.
 
 From Git Bash at the repository root:
 
@@ -51,7 +51,7 @@ Shared variables are defined in `config.sh`, which is loaded automatically by `i
 source ./config.sh
 ```
 
-`config.sh` derives the repository, virtual environment, logs, and certificate paths from the script location. Configure the SSH key path locally in this file. It exports `HTTP_PROXY`, `HTTPS_PROXY`, `REQUEST_CA_BUNDLE`, `PIP_CERT`, `PIP_TRUSTED_HOST`, and `SNOWFLAKE_LOGIN_EMAIL`. Values set in this file override any values already present in the shell.
+`config.sh` derives the repository, virtual environment, logs, and certificate paths from the script location. Set `local_python_version` there to select the Python version used to create the virtual environment. Configure the SSH key path locally in this file. It exports `HTTP_PROXY`, `HTTPS_PROXY`, `REQUEST_CA_BUNDLE`, `PIP_CERT`, `PIP_TRUSTED_HOST`, and `SNOWFLAKE_LOGIN_EMAIL`. Values set in this file override any values already present in the shell.
 
 ## Run dbt
 

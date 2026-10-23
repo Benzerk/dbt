@@ -112,5 +112,7 @@ The scripts derive repository paths from their own locations. The example comman
 
 ## Developer documentation
 
-- [Bash specifics (English)](docs/bash-specifics.en.md)
-- [Spécificités Bash (français)](docs/bash-specifics.fr.md)
+- [Architecture and decisions (ADR, English)](docs/en/architecture.md)
+- [Architecture et décisions (ADR, français)](docs/fr/architecture.md)
+- [Bash specifics (English)](docs/en/bash-specifics.md)
+- [Spécificités Bash (français)](docs/fr/bash-specifics.md)

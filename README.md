@@ -107,3 +107,8 @@ After confirmation, it removes `.virtualenv/` and `logs/`. It keeps the certific
 ## Path configuration
 
 The scripts derive repository paths from their own locations. The example commands assume they are run from the repository root.
+
+## Developer documentation
+
+- [Bash specifics (English)](docs/bash-specifics.en.md)
+- [Spécificités Bash (français)](docs/bash-specifics.fr.md)

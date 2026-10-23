@@ -18,7 +18,7 @@ fi
 set -euo pipefail
 
 # Load the shared configuration settings for the dbt helper scripts.
-source "$(dirname -- "${BASH_SOURCE[0]}")/config.sh"
+source "$(dirname -- "${BASH_SOURCE[0]}")/../config/config.sh"
 
 echo 'Creating Virtual Environment'
 py "-$local_python_version" --version
@@ -31,7 +31,7 @@ source "$local_virtual_env_activation_path"
 echo 'Installing Libraries'
 python -m ensurepip --default-pip
 python -m pip install --upgrade pip
-python -m pip install -r "${local_root_dir%/}/requirements.txt"
+python -m pip install -r "${local_root_dir%/}/config/requirements.txt"
 
 echo 'Creating Logs Directory'
 mkdir -p "${local_logs_dir%/}/"

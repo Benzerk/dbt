@@ -15,7 +15,7 @@ fi
 set -euo pipefail
 
 # Load the shared configuration settings for the dbt helper scripts.
-source "$(dirname -- "${BASH_SOURCE[0]}")/config.sh"
+source "$(dirname -- "${BASH_SOURCE[0]}")/../config/config.sh"
 
 if [[ -n "${VIRTUAL_ENV:-}" && -d "$local_virtual_env_dir" ]]; then
 	if active_venv_path="$(cd -- "$VIRTUAL_ENV" 2>/dev/null && pwd -P)" &&

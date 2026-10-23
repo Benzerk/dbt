@@ -35,7 +35,7 @@ usage() {
 }
 
 # Load the shared configuration settings for the dbt helper scripts.
-source "$(dirname -- "${BASH_SOURCE[0]}")/config.sh"
+source "$(dirname -- "${BASH_SOURCE[0]}")/../config/config.sh"
 
 mkdir -p "$local_logs_dir"
 selected_nodes=''

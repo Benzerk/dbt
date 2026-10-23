@@ -15,11 +15,11 @@ if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
 fi
 
 # Local root directory
-local_root_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+local_root_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
 local_logs_dir="${local_root_dir%/}/logs"
 
 # Local paths for certificates and SSH keys
-local_certificate_path="${local_root_dir%/}/zscaler.pem"
+local_certificate_path="${local_root_dir%/}/config/zscaler.pem"
 local_ssh_key_path="$HOME/.ssh/id_ed25519"
 
 # Python version selected by the Windows Python launcher

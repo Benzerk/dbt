@@ -134,8 +134,8 @@ run_dbt_operation() {
     fi
 }
 
-# DBT Login (available from DBT 2.0)
-# run_step "Login" dbt login
+# dbt debug triggers Snowflake SSO through the configured profile
+run_dbt_operation "Snowflake SSO" dbt debug "${strict_warning_args[@]}"
 
 # DBT Clean
 if [[ "$mode" = "rebuild" ]]; then

@@ -57,7 +57,7 @@ source ./config.sh
 
 `make.sh` runs dbt commands and saves each command's output to a timestamped file in the `logs` directory at the repository root. Run this script; do not source it.
 
-The default mode is a full rebuild. It runs `dbt clean`, `dbt deps --upgrade`, `dbt parse`, `dbt compile`, `dbt run --full-refresh`, and then `dbt test`:
+The default mode is a full rebuild. It runs `dbt debug`, `dbt clean`, `dbt deps --upgrade`, `dbt parse`, `dbt compile`, `dbt run --full-refresh`, and then `dbt test`:
 
 ```bash
 bash ./make.sh
@@ -69,6 +69,8 @@ The other modes are:
 - `run`: performs the same standard run as `build` without running `dbt test`.
 
 In `build` and `run` modes, `dbt run` excludes view-materialized models. The `rebuild` mode runs `dbt run --full-refresh`.
+
+All modes run `dbt debug` first. To use Snowflake SSO, configure the active output in `profiles.yml` with `authenticator: externalbrowser`. `dbt debug` then tests the connection and starts the browser-based Snowflake sign-in when needed. This is separate from `dbt login`, which authenticates to dbt Platform.
 
 Examples with a mode, node selection, or dbt variables:
 

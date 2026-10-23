@@ -6,7 +6,7 @@
 
 This repository provides local scripts to prepare a Python environment and run dbt with Snowflake from Git Bash on Windows. It does not describe the data model architecture of the dbt project being executed.
 
-Shared configuration is loaded by the scripts that need it. The user activates the environment in the current shell, then runs `make.sh` from the target dbt project directory. Virtual environment, certificate, and log paths are computed relative to the scripts repository; the working directory remains that of the caller.
+Shared configuration lives in `config/config.sh`, and scripts live in `scripts/`. The user activates the environment in the current shell, then runs `scripts/make.sh` by its absolute path from the target dbt project directory, as shown in the [README](../../README.md#run-dbt). Virtual environment, certificate, and log paths are computed relative to the scripts repository; the working directory remains that of the caller.
 
 ## Tracking convention
 
@@ -18,7 +18,7 @@ For a new decision, add a sequential identifier and use the template at the end 
 
 - Status: observed.
 - Documentation date: 2026-10-23.
-- References: [activate.sh](../../activate.sh), [deactivate.sh](../../deactivate.sh), [make.sh](../../make.sh).
+- References: [activate.sh](../../scripts/activate.sh), [deactivate.sh](../../scripts/deactivate.sh), [make.sh](../../scripts/make.sh).
 
 ### Context
 
@@ -36,7 +36,7 @@ The activated environment remains available to subsequent commands. However, sou
 
 - Status: observed.
 - Documentation date: 2026-10-23.
-- Reference: [config.sh](../../config.sh).
+- Reference: [config.sh](../../config/config.sh).
 
 ### Context
 
@@ -54,7 +54,7 @@ Paths remain consistent regardless of the calling directory. Configuration remai
 
 - Status: observed.
 - Documentation date: 2026-10-23.
-- Reference: [make.sh](../../make.sh).
+- Reference: [make.sh](../../scripts/make.sh).
 
 ### Context
 
@@ -74,7 +74,7 @@ Sequences are explicit and reusable, but the default rebuild can be costly, and 
 
 - Status: observed.
 - Documentation date: 2026-10-23.
-- References: [make.sh](../../make.sh), [activate.sh](../../activate.sh), [deactivate.sh](../../deactivate.sh).
+- References: [make.sh](../../scripts/make.sh), [activate.sh](../../scripts/activate.sh), [deactivate.sh](../../scripts/deactivate.sh).
 
 ### Context
 
@@ -92,7 +92,7 @@ Logs are available per operation without hiding a dbt failure behind a successfu
 
 - Status: observed.
 - Documentation date: 2026-10-23.
-- References: [make.sh](../../make.sh), [README](../../README.md).
+- References: [make.sh](../../scripts/make.sh), [README](../../README.md).
 
 ### Context
 
@@ -110,7 +110,7 @@ A connection error interrupts the workflow before subsequent processing. SSO may
 
 - Status: observed.
 - Documentation date: 2026-10-23.
-- References: [requirements.txt](../../requirements.txt), [Requests #7284](https://github.com/psf/requests/issues/7284).
+- References: [requirements.txt](../../config/requirements.txt), [Requests #7284](https://github.com/psf/requests/issues/7284).
 
 ### Context
 

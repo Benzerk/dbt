@@ -3,14 +3,14 @@
 # config.sh - Shared environment settings for the dbt helper scripts.
 #
 # Usage:
-#   source ./config.sh
+#   source config/config.sh
 #
 # Should be sourced, not executed, to properly set environment variables in the calling shell.
 #
 
 # Force sourcing instead of executing
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
-    echo 'Error: source ./config.sh instead of executing it.' >&2
+    echo 'Error: source config/config.sh instead of executing it.' >&2
     exit 1
 fi
 

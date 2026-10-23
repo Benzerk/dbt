@@ -6,7 +6,7 @@
 
 Ce dépôt fournit des scripts locaux pour préparer un environnement Python et piloter dbt avec Snowflake depuis Git Bash sous Windows. Il ne décrit pas l'architecture des modèles de données du projet dbt exécuté.
 
-La configuration partagée est chargée par les scripts qui en ont besoin. L'utilisateur active son environnement dans le shell courant, puis lance `make.sh` depuis le répertoire du projet dbt cible. Les chemins du virtualenv, du certificat et des logs sont calculés à partir du dépôt des scripts ; le répertoire de travail reste celui de l'appelant.
+La configuration partagée se trouve dans `config/config.sh` et les scripts dans `scripts/`. L'utilisateur active son environnement dans le shell courant, puis lance `scripts/make.sh` par son chemin absolu depuis le répertoire du projet dbt cible, comme indiqué dans le [README](../../README.md#run-dbt). Les chemins du virtualenv, du certificat et des logs sont calculés à partir du dépôt des scripts ; le répertoire de travail reste celui de l'appelant.
 
 ## Convention de suivi
 
@@ -18,7 +18,7 @@ Pour une nouvelle décision, ajouter un identifiant séquentiel et utiliser le m
 
 - Statut : constaté.
 - Date de documentation : 2026-10-23.
-- Références : [activate.sh](../../activate.sh), [deactivate.sh](../../deactivate.sh), [make.sh](../../make.sh).
+- Références : [activate.sh](../../scripts/activate.sh), [deactivate.sh](../../scripts/deactivate.sh), [make.sh](../../scripts/make.sh).
 
 ### Contexte
 
@@ -36,7 +36,7 @@ L'environnement activé reste disponible pour les commandes suivantes. En contre
 
 - Statut : constaté.
 - Date de documentation : 2026-10-23.
-- Référence : [config.sh](../../config.sh).
+- Référence : [config.sh](../../config/config.sh).
 
 ### Contexte
 
@@ -54,7 +54,7 @@ Les chemins restent cohérents quel que soit le répertoire d'appel. La configur
 
 - Statut : constaté.
 - Date de documentation : 2026-10-23.
-- Référence : [make.sh](../../make.sh).
+- Référence : [make.sh](../../scripts/make.sh).
 
 ### Contexte
 
@@ -74,7 +74,7 @@ Les séquences sont explicites et réutilisables, mais la reconstruction par dé
 
 - Statut : constaté.
 - Date de documentation : 2026-10-23.
-- Références : [make.sh](../../make.sh), [activate.sh](../../activate.sh), [deactivate.sh](../../deactivate.sh).
+- Références : [make.sh](../../scripts/make.sh), [activate.sh](../../scripts/activate.sh), [deactivate.sh](../../scripts/deactivate.sh).
 
 ### Contexte
 
@@ -92,7 +92,7 @@ Les traces sont disponibles par opération, sans masquer un échec dbt derrière
 
 - Statut : constaté.
 - Date de documentation : 2026-10-23.
-- Références : [make.sh](../../make.sh), [README](../../README.md).
+- Références : [make.sh](../../scripts/make.sh), [README](../../README.md).
 
 ### Contexte
 
@@ -110,7 +110,7 @@ Une erreur de connexion interrompt le flux avant les traitements suivants. Le SS
 
 - Statut : constaté.
 - Date de documentation : 2026-10-23.
-- Références : [requirements.txt](../../requirements.txt), [Requests #7284](https://github.com/psf/requests/issues/7284).
+- Références : [requirements.txt](../../config/requirements.txt), [Requests #7284](https://github.com/psf/requests/issues/7284).
 
 ### Contexte
 

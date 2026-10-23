@@ -3,15 +3,15 @@
 # install.sh - One-time setup: create the Python virtual environment for dbt, install the company CA certificate, and install the project's Python dependencies.
 #
 # Usage:
-#   source ~/workspace/dbt/install.sh
+#   bash scripts/install.sh
 #
-# Can be sourced or executed, but sourcing leaves the virtual environment active in the calling shell afterward instead of requiring a separate `source activate.sh`.
+# Must be executed; activate the environment afterward with `source scripts/activate.sh`.
 # Stops on the first failing command (set -e) instead of silently continuing with a broken/partial install.
 #
 
 # Prevent sourcing instead of executing
 if [[ "${BASH_SOURCE[0]}" != "$0" ]]; then
-    echo 'Error: run this script with bash ./install.sh; do not source it.' >&2
+    echo 'Error: run this script with bash scripts/install.sh; do not source it.' >&2
     return 1
 fi
 

@@ -3,7 +3,7 @@
 # make.sh - Clean, rebuild (optional), run and test a dbt project.
 #
 # Usage:
-#   ~/workspace/dbt/make.sh [-m rebuild|run] [-s "<dbt selection>"] [-v '<json>'] [--strict]
+#   bash scripts/make.sh [-m rebuild|run] [-s "<dbt selection>"] [-v '<json>'] [--strict]
 #
 # Must be executed, not sourced (sourcing runs dbt in the calling shell and may exit that shell on help or error).
 #
@@ -19,15 +19,15 @@
 #   -h, --help                          Show this help message and exit
 #
 # Examples:
-#   ./make.sh
-#   ./make.sh --mode run
-#   ./make.sh --select "raw.raw_pi2 intermediate.int_product exposure.dp_product exposure.dp_product_legacy"
-#   ./make.sh --vars '{"variable": "value"}'
+#   bash scripts/make.sh
+#   bash scripts/make.sh --mode run
+#   bash scripts/make.sh --select "raw.raw_pi2 intermediate.int_product exposure.dp_product exposure.dp_product_legacy"
+#   bash scripts/make.sh --vars '{"variable": "value"}'
 #
 
 # Prevent sourcing instead of executing
 if [[ "${BASH_SOURCE[0]}" != "$0" ]]; then
-    echo 'Error: run this script with bash ./make.sh; do not source it.' >&2
+    echo 'Error: run this script with bash scripts/make.sh; do not source it.' >&2
     return 1
 fi
 usage() {

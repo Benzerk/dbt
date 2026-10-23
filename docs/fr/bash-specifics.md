@@ -4,9 +4,9 @@ Les scripts de ce dépôt sont écrits pour **Bash**, et sont utilisés depuis G
 
 ## Sourcer ou exécuter un script
 
-Un script exécuté démarre dans un processus séparé. Ses changements de variables d'environnement ne peuvent pas modifier le shell appelant. `install.sh`, `make.sh` et `uninstall.sh` sont destinés à être exécutés avec `bash ./nom-du-script.sh`.
+Un script exécuté démarre dans un processus séparé. Ses changements de variables d'environnement ne peuvent pas modifier le shell appelant. Les scripts se trouvent dans `scripts/` : depuis la racine du dépôt, lancer par exemple `bash ./scripts/install.sh`. Pour dbt, lancer `make.sh` par son chemin absolu depuis le projet cible, comme indiqué dans le [README](../../README.md#run-dbt).
 
-À l'inverse, `source ./nom-du-script.sh` exécute le fichier dans le shell courant. C'est nécessaire pour que l'activation du virtualenv, les `export` de `config.sh` et les `unset` de `deactivate.sh` persistent après le retour du script. `config.sh`, `activate.sh` et `deactivate.sh` doivent donc être sourcés.
+À l'inverse, `source ./scripts/activate.sh` exécute le fichier dans le shell courant. C'est nécessaire pour que l'activation du virtualenv, les `export` de `config.sh` et les `unset` de `deactivate.sh` persistent après le retour du script. `config/config.sh`, `scripts/activate.sh` et `scripts/deactivate.sh` doivent donc être sourcés. Ces chemins relatifs supposent la racine du dépôt ; depuis un autre répertoire, utiliser leur chemin absolu.
 
 Les scripts détectent ce contexte avec `${BASH_SOURCE[0]}` et `$0` : quand ils sont sourcés, le fichier courant diffère du programme lancé. Ils refusent le mauvais mode d'utilisation. Dans un script sourcé, `return` quitte le fichier sans fermer le shell ; dans un script exécuté, `exit` termine le processus.
 
@@ -15,10 +15,10 @@ Les scripts détectent ce contexte avec `${BASH_SOURCE[0]}` et `$0` : quand ils 
 Les scripts chargent la configuration avec une commande de la forme :
 
 ```bash
-source "$(dirname -- "${BASH_SOURCE[0]}")/config.sh"
+source "$(dirname -- "${BASH_SOURCE[0]}")/../config/config.sh"
 ```
 
-`BASH_SOURCE[0]` désigne le fichier Bash courant, `dirname` en extrait le répertoire, et `$(...)` exécute cette commande puis insère son résultat. Ainsi, la configuration est trouvée même si le script est lancé depuis un autre répertoire. `cd -- ... && pwd -P` dans `config.sh` calcule ensuite un chemin absolu et physique pour la racine du dépôt.
+`BASH_SOURCE[0]` désigne le fichier Bash courant, `dirname` en extrait le répertoire, et `$(...)` exécute cette commande puis insère son résultat. Depuis `scripts/`, `../config/config.sh` retrouve la configuration même si le script est lancé depuis un autre répertoire. Dans `config/config.sh`, `cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P` calcule ensuite un chemin absolu et physique pour la racine du dépôt, un niveau au-dessus de `config/`.
 
 Les guillemets autour des expansions protègent les chemins contenant des espaces. `--` indique aux commandes comme `dirname` ou `cd` que les arguments suivants ne sont pas des options.
 

@@ -4,9 +4,9 @@ The scripts in this repository are written for **Bash** and are used from Git Ba
 
 ## Sourcing or executing a script
 
-An executed script runs in a separate process. Its environment-variable changes cannot affect the calling shell. `install.sh`, `make.sh`, and `uninstall.sh` are intended to be run with `bash ./script-name.sh`.
+An executed script runs in a separate process. Its environment-variable changes cannot affect the calling shell. Scripts live in `scripts/`: from the repository root, run for example `bash ./scripts/install.sh`. For dbt, run `make.sh` by its absolute path from the target project, as shown in the [README](../../README.md#run-dbt).
 
-By contrast, `source ./script-name.sh` runs the file in the current shell. This is required for virtual-environment activation and the `export` operations in `config.sh` or `unset` operations in `deactivate.sh` to persist after the script returns. Therefore, `config.sh`, `activate.sh`, and `deactivate.sh` must be sourced.
+By contrast, `source ./scripts/activate.sh` runs the file in the current shell. This is required for virtual-environment activation and the `export` operations in `config.sh` or `unset` operations in `deactivate.sh` to persist after the script returns. Therefore, `config/config.sh`, `scripts/activate.sh`, and `scripts/deactivate.sh` must be sourced. These relative paths assume the repository root; use their absolute paths from another directory.
 
 The scripts detect this context by comparing `${BASH_SOURCE[0]}` with `$0`: when sourced, the current file differs from the launched program. They reject the wrong invocation mode. In a sourced script, `return` leaves the file without closing the shell; in an executed script, `exit` terminates the process.
 
@@ -15,10 +15,10 @@ The scripts detect this context by comparing `${BASH_SOURCE[0]}` with `$0`: when
 Scripts load the shared configuration with a command like this:
 
 ```bash
-source "$(dirname -- "${BASH_SOURCE[0]}")/config.sh"
+source "$(dirname -- "${BASH_SOURCE[0]}")/../config/config.sh"
 ```
 
-`BASH_SOURCE[0]` identifies the current Bash file, `dirname` extracts its directory, and `$(...)` runs that command and inserts its output. This lets the script find the configuration even when launched from another working directory. In `config.sh`, `cd -- ... && pwd -P` then computes an absolute, physical path for the repository root.
+`BASH_SOURCE[0]` identifies the current Bash file, `dirname` extracts its directory, and `$(...)` runs that command and inserts its output. From `scripts/`, `../config/config.sh` locates the configuration even when launched from another working directory. In `config/config.sh`, `cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P` then computes an absolute, physical path for the repository root, one level above `config/`.
 
 Quoting expansions protects paths that contain spaces. The `--` argument tells commands such as `dirname` or `cd` that following arguments are not options.
 

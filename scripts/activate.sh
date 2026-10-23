@@ -3,7 +3,7 @@
 # activate.sh - Activate the Python virtual environment, environment variables and ssh-agent session needed to run dbt.
 #
 # Usage:
-#   source ~/workspace/dbt/activate.sh [--update]
+#   source scripts/activate.sh [--update]
 #
 # Options:
 #   -u, --update    Check for Python and dbt updates (skipped by default)
@@ -15,7 +15,7 @@
 
 # Force sourcing instead of executing
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
-    echo 'Error: source ./activate.sh instead of executing it.' >&2
+    echo 'Error: source scripts/activate.sh instead of executing it.' >&2
     exit 1
 fi
 

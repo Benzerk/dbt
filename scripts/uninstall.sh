@@ -3,12 +3,12 @@
 # uninstall.sh - Remove the local Python virtual environment and generated logs.
 #
 # Usage:
-#   bash ./uninstall.sh
+#   bash scripts/uninstall.sh
 #
 
 # Prevent sourcing instead of executing.
 if [[ "${BASH_SOURCE[0]}" != "$0" ]]; then
-	echo 'Error: run this script with bash ./uninstall.sh; do not source it.' >&2
+	echo 'Error: run this script with bash scripts/uninstall.sh; do not source it.' >&2
 	return 1
 fi
 
@@ -22,7 +22,7 @@ if [[ -n "${VIRTUAL_ENV:-}" && -d "$local_virtual_env_dir" ]]; then
 		target_venv_path="$(cd -- "$local_virtual_env_dir" 2>/dev/null && pwd -P)" &&
 		[[ "$active_venv_path" == "$target_venv_path" ]]; then
 		echo 'Error: deactivate this repository virtual environment before uninstalling.' >&2
-		echo 'Run: source ./deactivate.sh' >&2
+		echo 'Run: source scripts/deactivate.sh' >&2
 		exit 1
 	fi
 fi

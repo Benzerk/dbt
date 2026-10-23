@@ -106,6 +106,26 @@ Run `dbt debug` first in every mode. For browser-based SSO, the user configures 
 
 A connection error interrupts the workflow before subsequent processing. SSO may require browser interaction; this method is not an automated authentication strategy for CI. One possible alternative is a non-interactive mechanism approved for the target environment.
 
+## ADR-006: pin chardet to 5.2.0 to avoid a Requests warning
+
+- Status: observed.
+- Documentation date: 2026-10-23.
+- References: [requirements.txt](../../requirements.txt), [Requests #7284](https://github.com/psf/requests/issues/7284).
+
+### Context
+
+Requests may use `chardet` as an optional encoding-detection dependency when it is installed. Issue #7284 describes a `RequestsDependencyWarning` when importing Requests with a `chardet` version outside the supported range. In the reported case, Requests 2.32.5 expects a `chardet` version below 6; this constraint should not be generalized to all future Requests versions.
+
+### Observed decision
+
+Explicitly pin `chardet==5.2.0` in `requirements.txt` to avoid this warning in the project environment rather than suppressing warnings. The dependency comment references the issue to preserve the reason for the pin.
+
+### Consequences and alternatives
+
+The installed `chardet` version is deterministic, but it no longer receives automatic updates. Reassess this pin when updating Requests or other dependencies, and verify that the warning is absent in a reinstalled environment before removing it. The issue explains the original problem; it does not by itself prove that the workaround remains necessary with every new Requests version.
+
+Possible alternatives include using a newer compatible version combination, or removing `chardet` and letting Requests use `charset-normalizer` if no other dependency requires `chardet`. Globally suppressing warnings would hide other incompatibilities and is not the chosen solution.
+
 ## Template for a new decision
 
 ```markdown

@@ -106,6 +106,26 @@ Exécuter `dbt debug` en premier dans tous les modes. Pour le SSO navigateur, l'
 
 Une erreur de connexion interrompt le flux avant les traitements suivants. Le SSO peut nécessiter une interaction avec le navigateur ; cette méthode n'est pas une stratégie d'authentification automatisée pour la CI. Alternative possible : un mécanisme non interactif approuvé pour l'environnement cible.
 
+## ADR-006 : figer chardet à 5.2.0 pour éviter un warning Requests
+
+- Statut : constaté.
+- Date de documentation : 2026-10-23.
+- Références : [requirements.txt](../../requirements.txt), [Requests #7284](https://github.com/psf/requests/issues/7284).
+
+### Contexte
+
+Requests peut utiliser `chardet` comme dépendance optionnelle de détection d'encodage lorsqu'il est installé. L'issue #7284 décrit un `RequestsDependencyWarning` à l'import de Requests avec une version de `chardet` hors de la plage prise en charge. Dans le cas rapporté, Requests 2.32.5 attend une version de `chardet` inférieure à 6 ; cette contrainte ne doit pas être généralisée à toutes les versions futures de Requests.
+
+### Décision observée
+
+Figer explicitement `chardet==5.2.0` dans `requirements.txt` afin d'éviter ce warning dans l'environnement du projet, plutôt que de masquer les avertissements. Le commentaire de la dépendance référence l'issue pour conserver la justification du verrouillage.
+
+### Conséquences et alternatives
+
+La version installée de `chardet` est déterministe, mais ses mises à jour ne sont plus automatiques. Réévaluer ce verrouillage lors des mises à jour de Requests ou des dépendances et vérifier l'absence de ce warning dans l'environnement réinstallé avant de le retirer. L'issue explique le problème d'origine ; elle ne prouve pas à elle seule que le contournement reste nécessaire avec chaque nouvelle version de Requests.
+
+Alternatives possibles : utiliser une combinaison de versions compatible plus récente, ou retirer `chardet` et laisser Requests utiliser `charset-normalizer` si aucune autre dépendance ne nécessite `chardet`. Masquer globalement les warnings empêcherait de voir d'autres incompatibilités et n'est pas la solution retenue.
+
 ## Modèle pour une nouvelle décision
 
 ```markdown

@@ -1,11 +1,12 @@
 pip-system-certs==5.3
 dbt-core==1.12.6
 dbt-snowflake==1.12.4
-# snowflake-connector-python==5.1.0
-snowflake-connector-python==4.8.0
-requests==2.34.2
+chardet==5.2.0 # ADR-006
+
+# Linter not required for dbt execution
+# sqlfluff==4.4.0
+# sqlfluff-templater-dbt==4.4.0
+
+# Libraries for ad-hoc scripts outside of project scope that use same virtual environment for convenience
 python-dotenv==1.2.4
 jmespath==1.1.0
-chardet==5.2.0 # https://github.com/psf/requests/issues/7284
-sqlfluff==4.4.0
-sqlfluff-templater-dbt==4.4.0

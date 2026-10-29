@@ -1,9 +1,15 @@
+# Requirements for company certificates
 pip-system-certs==5.3
+
+# Requirements for DBT v2
+# dbt-oss==2.0.8
+
+# Requirements for DBT v1
 dbt-core==1.12.6
 dbt-snowflake==1.12.4
 chardet==5.2.0 # ADR-006
 
-# Linter not required for dbt execution
+# Linter
 # sqlfluff==4.4.0
 # sqlfluff-templater-dbt==4.4.0
 

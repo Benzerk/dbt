@@ -6,7 +6,7 @@ pip-system-certs==5.3
 
 # Requirements for DBT v1
 dbt-core==1.12.6
-dbt-snowflake==1.12.4
+dbt-snowflake==1.12.5
 chardet==5.2.0 # ADR-006
 
 # Linter
